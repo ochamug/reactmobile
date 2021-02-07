@@ -1,29 +1,44 @@
 
 import  React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native';
+import Header from './components/header';
+import TodoItem from './components/todoItem';
 
 export default function App() {
 
-  <Text>Epic Man</Text>
+  const [todos, setTodos] = useState([
+    {title: 'Get The Groceries', id:'1'},
+    {title: 'Finish Homework', id:'2'},
+    {title: 'Code Training', id:'3'},
+  ])
+
+  return (
+    <View style={ styles.container }>
+      <Header/>
+      <View style={ styles.listContainer }>
+        <FlatList
+        style={{width:'100%'}}
+        data={ todos }
+        keyExtractor= { todo => todo.id}
+        renderItem = {({ item }) => (
+          <TodoItem item={ item }/>
+        )}
+        />
+      </View>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ddd',
+    backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
   },
 
-  item:{
-    marginTop: 30,
+  listContainer:{
     width: '100%',
-    padding: 30,
-    fontSize: 20,
-    fontWeight: 'bold',
-    backgroundColor: "#d0d",
-    color: "#fff",
-    borderRadius: 999,
-    marginHorizontal: 0,
+    alignItems: 'center',
+    paddingHorizontal: 30,
   }
 });
