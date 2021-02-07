@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native
 
 export default function App() {
 
-  
+  <Text>Epic Man</Text>
 }
 
 const styles = StyleSheet.create({
