@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 
-export default TodoItem = ({ item }) => {
+export default TodoItem = ({ item, deleteItemHandler}) => {
 
     return(
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => deleteItemHandler(item.id)}>
             <Text style={ styles.item }>{ item.title }</Text>
         </TouchableOpacity>
     );
