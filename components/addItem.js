@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, TextInput, View, Text } from 'react-native';
 
-export default AddItem = ()=>{
+export default AddItem = ({ addItemHandler })=>{
     const [title, setTitle] = useState('');
 
     const changeHandler = (val)=>{
         setTitle(val);
-    }
+    } 
 
     return(
         <View style={styles.container}>
@@ -15,7 +15,8 @@ export default AddItem = ()=>{
             placeholder="e.g Sleep"
             onChangeText={ (val)=> changeHandler(val) }/>
             <TouchableOpacity 
-            style={{width:'100%'}}>
+            style={{width:'100%'}}
+            onPress={() => addItemHandler(title)}>
                 <Text style={styles.button}>Add Todo List</Text>
             </TouchableOpacity>
         </View>
@@ -25,7 +26,7 @@ export default AddItem = ()=>{
 const styles = StyleSheet.create({
     container:{
         width: '100%',
-        alignItems: 'center'
+        alignItems: 'center',
     },
 
     input:{
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         borderBottomWidth: 1,
         borderColor: '#dce',
-        marginBottom: 20,
+        marginBottom: 10,
     },
 
     button:{
