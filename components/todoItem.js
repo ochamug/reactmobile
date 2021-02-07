@@ -20,5 +20,6 @@ const styles = StyleSheet.create({
         marginTop: 20,
         textAlign: 'center',
         fontSize: 15,
+        borderStyle: 'dotted',
     }
 });
