@@ -3,6 +3,7 @@ import  React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native';
 import Header from './components/header';
 import TodoItem from './components/todoItem';
+import AddItem from './components/addItem';
 
 export default function App() {
 
@@ -15,7 +16,8 @@ export default function App() {
   return (
     <View style={ styles.container }>
       <Header/>
-      <View style={ styles.listContainer }>
+      <View style={ styles.content }>
+        <AddItem/>
         <FlatList
         style={{width:'100%'}}
         data={ todos }
@@ -36,9 +38,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  listContainer:{
+  content:{
     width: '100%',
     alignItems: 'center',
+    paddingVertical: 10,
     paddingHorizontal: 30,
   }
 });
