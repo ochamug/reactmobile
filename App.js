@@ -1,6 +1,6 @@
 
 import  React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard, FlatList, Alert } from 'react-native';
 import Header from './components/header';
 import TodoItem from './components/todoItem';
 import AddItem from './components/addItem';
@@ -13,21 +13,45 @@ export default function App() {
     {title: 'Code Training', id:'3'},
   ])
 
+  const deleteItemHandler = (id) => {
+    setTodos(todos.filter( todo => todo.id != id ));
+  }
+
+  const addItemHandler = (val) => {
+
+    if(val === ''){
+      Alert.alert('Oops!', 'Title can\'t be empty!', [
+        { text: 'Got It!' }
+      ]);
+      return;
+    }
+    setTodos([
+      {title: `${val}`, id: Math.random().toString()},
+      ...todos,
+    ])
+  }
+
   return (
-    <View style={ styles.container }>
-      <Header/>
-      <View style={ styles.content }>
-        <AddItem/>
-        <FlatList
-        style={{width:'100%'}}
-        data={ todos }
-        keyExtractor= { todo => todo.id}
-        renderItem = {({ item }) => (
-          <TodoItem item={ item }/>
-        )}
-        />
+    <TouchableWithoutFeedback
+    onPress={() => Keyboard.dismiss()}>
+      <View style={ styles.container }>
+        <Header/>
+        <View style={ styles.content }>
+          <AddItem
+          addItemHandler = {addItemHandler}/>
+          <FlatList
+          style={{width:'100%', marginTop: 30}}
+          data={ todos }
+          keyExtractor= { todo => todo.id}
+          renderItem = {({ item }) => (
+            <TodoItem 
+            item={ item }
+            deleteItemHandler = {deleteItemHandler}/>
+          )}
+          />
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   )
 }
 
